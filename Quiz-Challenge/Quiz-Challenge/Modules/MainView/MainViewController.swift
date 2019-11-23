@@ -10,6 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController{
 	
+	@IBOutlet weak var contentView: UIView!
 	@IBOutlet weak var blankView: UIView!
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var insertWordTF: UITextField!
@@ -19,18 +20,9 @@ class MainViewController: UIViewController{
 	@IBOutlet weak var controlButton: PrimaryButton!
 	@IBOutlet weak var grayView: UIView!
 	@IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var contentViewHeight: NSLayoutConstraint!
 	
-	private var isPortrait: Bool {
-		let orientation = UIDevice.current.orientation
-		switch orientation {
-		case .portrait, .portraitUpsideDown:
-			return true
-		case .landscapeLeft, .landscapeRight:
-			return false
-		default:
-			return true
-		}
-	}
+	private var keyboardHeight: CGFloat?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -65,6 +57,12 @@ class MainViewController: UIViewController{
 			object: nil
 		)
 		
+		NotificationCenter.default.addObserver(
+			self,
+			selector: #selector(rotated),
+			name: UIDevice.orientationDidChangeNotification,
+			object: nil)
+		
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
 		self.view.addGestureRecognizer(tapGesture)
 	}
@@ -88,12 +86,25 @@ class MainViewController: UIViewController{
 		if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
 			let keyboardRectangle = keyboardFrame.cgRectValue
 			let keyboardHeight = keyboardRectangle.height
+			self.keyboardHeight = keyboardHeight
 			self.bottomConstraint.constant = keyboardHeight
+			if UIDevice.current.orientation.isLandscape{self.contentViewHeight.constant = keyboardHeight}
 		}
 	}
 	
 	@objc private func keyboardWillHide(_ notification: Notification) {
-		self.bottomConstraint.constant = 0
+		self.bottomConstraint.constant = 16
+		self.contentViewHeight.constant = 0
+		self.keyboardHeight = nil
+	}
+	
+	@objc private func rotated(){
+		if UIDevice.current.orientation.isLandscape, let keyboardHeight = self.keyboardHeight{
+			self.contentViewHeight.constant = keyboardHeight
+		} else {
+			self.contentViewHeight.constant = 0
+		}
+		
 	}
 	
 	@objc private func dismissKeyboard (_ sender: UITapGestureRecognizer) {
