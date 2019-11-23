@@ -200,6 +200,9 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                                         <state key="normal" title="Start"/>
+                                                        <connections>
+                                                            <action selector="controlButtonAction:" destination="nDP-QG-jm0" eventType="touchUpInside" id="Fjc-Lj-X0H"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00/50" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1u-Xo-XYT">
                                                         <rect key="frame" x="16" y="16" width="101" height="41"/>

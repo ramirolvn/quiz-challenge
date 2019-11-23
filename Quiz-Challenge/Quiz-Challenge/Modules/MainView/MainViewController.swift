@@ -24,9 +24,23 @@ class MainViewController: UIViewController{
 	
 	private var keyboardHeight: CGFloat?
 	
+	private var wordsFounds: [String] = []
+	
+	
+	
+	var viewModel: MainViewModelProtocol!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.viewModel = MainViewModel()
 		configView()
+		getWords()
+		
+	}
+	
+	private func getWords(){
+		self.showLoad()
+		viewModel.getWordsFromServer()
 	}
 	
 	private func configView(){
@@ -40,6 +54,7 @@ class MainViewController: UIViewController{
 	private func configTextField(){
 		insertWordTF.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 10)
 		insertWordTF.layer.cornerRadius = 12
+		insertWordTF.delegate = self
 	}
 	
 	private func notificationsObservers(){
@@ -63,22 +78,66 @@ class MainViewController: UIViewController{
 			name: UIDevice.orientationDidChangeNotification,
 			object: nil)
 		
+		viewModel.timeLabelText.addObserver { labeltext in
+			self.timeLabel.text = labeltext
+		}
+		
+		viewModel.scoreLabelText.addObserver({ labeltext in
+			self.scoreLabel.text = labeltext
+		})
+		
+		viewModel.wordsToShow.addObserver({ words in
+			self.wordsFounds = words
+			self.wordListTable.reloadData()
+			self.insertWordTF.text = ""
+			self.insertWordTF.becomeFirstResponder()
+			
+		})
+		
+		viewModel.quiz1.addObserver({ quiz in
+			guard let quiz = quiz else { self.viewModel.getWordsFromServer();return}
+			self.titleLabel.text = quiz.question
+			self.hideLoad()
+		})
+		
+		viewModel.timeOver.addObserver({ timeOver in
+			if timeOver{
+				self.showAlertTimeOver(userScore: self.viewModel.userScore, maxScore: self.viewModel.maxScore, tryAgainAction: {
+					_ in
+					self.playAgain()
+				})
+			}
+		})
+		viewModel.gameCompleted.addObserver({ gameCompleted in
+			if gameCompleted{
+				self.showAlertGameCompleted(playAgainAction: {_ in
+					self.playAgain()
+				})
+			}
+		})
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
 		self.view.addGestureRecognizer(tapGesture)
 	}
 	
-	
-	//Mark: - Blank Functions
-	private func hideView(){
-		titleLabel.isHidden = true
-		insertWordTF.isHidden = true
-		wordListTable.isHidden = true
+	private func playAgain(){
+		self.controlButton.setTitle("Start", for: .normal)
+		self.viewModel.resetGame()
 	}
 	
-	private func showView(){
-		titleLabel.isHidden  = false
+	
+	//Mark: - Load Functions
+	private func hideLoad(){
+		self.stopLoad()
+		titleLabel.isHidden = false
 		insertWordTF.isHidden = false
 		wordListTable.isHidden = false
+	}
+	
+	private func showLoad(){
+		self.startLoad()
+		titleLabel.isHidden  = true
+		insertWordTF.isHidden = true
+		wordListTable.isHidden = true
 	}
 	
 	//Mark: - Notifications Functions
@@ -88,6 +147,7 @@ class MainViewController: UIViewController{
 			let keyboardHeight = keyboardRectangle.height
 			self.keyboardHeight = keyboardHeight
 			self.bottomConstraint.constant = keyboardHeight
+			insertWordTF.becomeFirstResponder()
 			if UIDevice.current.orientation.isLandscape{self.contentViewHeight.constant = keyboardHeight}
 		}
 	}
@@ -111,18 +171,40 @@ class MainViewController: UIViewController{
 		insertWordTF.resignFirstResponder()
 	}
 	
+	@IBAction func controlButtonAction(_ sender: PrimaryButton) {
+		if viewModel.isPlaying{
+			sender.setTitle("Start", for: .normal)
+		}else{
+			sender.setTitle("Reset", for: .normal)
+		}
+		viewModel.buttonPressed()
+	}
 	
 }
+
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 1
+		return viewModel.rowsCount()
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell()
-		cell.textLabel?.text = "Oi"
+		let word = self.wordsFounds[indexPath.item]
+		cell.textLabel?.text = word
 		return cell
 	}
-	
-	
+}
+
+extension MainViewController: UITextFieldDelegate {
+	func textField(_ textField: UITextField,
+				   shouldChangeCharactersIn range: NSRange,
+				   replacementString string: String) -> Bool {
+		if let text = textField.text,
+			let textRange = Range(range, in: text) {
+			let updatedText = text.replacingCharacters(in: textRange,
+													   with: string)
+			return viewModel.testIfExistWord(updatedText)
+		}
+		return true
+	}
 }

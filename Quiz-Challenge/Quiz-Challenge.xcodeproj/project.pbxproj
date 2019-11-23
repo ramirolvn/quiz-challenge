@@ -153,6 +153,18 @@
 		36BD82022387854C0016C3BE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BD82002387854C0016C3BE /* MainViewController.swift */; };
 		36BD82042387855B0016C3BE /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BD82032387855B0016C3BE /* MainViewModel.swift */; };
 		36BD82052387855B0016C3BE /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BD82032387855B0016C3BE /* MainViewModel.swift */; };
+		36C7B6BF2388DC140037158B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C7B6BE2388DC140037158B /* Service.swift */; };
+		36C7B6C02388DC140037158B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C7B6BE2388DC140037158B /* Service.swift */; };
+		36C7B6C22388DC4A0037158B /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C7B6C12388DC4A0037158B /* ServiceProvider.swift */; };
+		36C7B6C32388DC4A0037158B /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C7B6C12388DC4A0037158B /* ServiceProvider.swift */; };
+		36C7B6C52388DCD80037158B /* CodeChallengeRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C7B6C42388DCD80037158B /* CodeChallengeRequests.swift */; };
+		36C7B6C62388DCD80037158B /* CodeChallengeRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C7B6C42388DCD80037158B /* CodeChallengeRequests.swift */; };
+		36C7B6C92388E4050037158B /* Quiz1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C7B6C82388E4050037158B /* Quiz1.swift */; };
+		36C7B6CA2388E4050037158B /* Quiz1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C7B6C82388E4050037158B /* Quiz1.swift */; };
+		36EFC82E2389806600E9AD04 /* GenericObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EFC82D2389806600E9AD04 /* GenericObservable.swift */; };
+		36EFC82F2389806600E9AD04 /* GenericObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EFC82D2389806600E9AD04 /* GenericObservable.swift */; };
+		36EFC83123899BD800E9AD04 /* AlertView+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EFC83023899BD800E9AD04 /* AlertView+UIViewController.swift */; };
+		36EFC83223899BD800E9AD04 /* AlertView+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EFC83023899BD800E9AD04 /* AlertView+UIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -246,6 +258,12 @@
 		36BD81F9238780F10016C3BE /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		36BD82002387854C0016C3BE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		36BD82032387855B0016C3BE /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		36C7B6BE2388DC140037158B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		36C7B6C12388DC4A0037158B /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
+		36C7B6C42388DCD80037158B /* CodeChallengeRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChallengeRequests.swift; sourceTree = "<group>"; };
+		36C7B6C82388E4050037158B /* Quiz1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz1.swift; sourceTree = "<group>"; };
+		36EFC82D2389806600E9AD04 /* GenericObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericObservable.swift; sourceTree = "<group>"; };
+		36EFC83023899BD800E9AD04 /* AlertView+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertView+UIViewController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +305,7 @@
 		367909CC238773CA009449FD /* Quiz-Challenge */ = {
 			isa = PBXGroup;
 			children = (
+				36C7B6BD2388DBF40037158B /* Network */,
 				36BD81FE238784C90016C3BE /* Modules */,
 				36BD81FD238784C30016C3BE /* Model */,
 				36BD813C23877F990016C3BE /* Suporting Files */,
@@ -323,6 +342,7 @@
 		36BD8128238778610016C3BE /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				36EFC82C2389804D00E9AD04 /* Observables */,
 				36BD812D238778C90016C3BE /* Constants */,
 				36BD8129238778670016C3BE /* Extensions */,
 			);
@@ -333,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				36BD812A2387788A0016C3BE /* LoaderView+UIViewController.swift */,
+				36EFC83023899BD800E9AD04 /* AlertView+UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -475,6 +496,7 @@
 		36BD81FD238784C30016C3BE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				36C7B6C82388E4050037158B /* Quiz1.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -494,6 +516,24 @@
 				36BD82032387855B0016C3BE /* MainViewModel.swift */,
 			);
 			path = MainView;
+			sourceTree = "<group>";
+		};
+		36C7B6BD2388DBF40037158B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				36C7B6BE2388DC140037158B /* Service.swift */,
+				36C7B6C12388DC4A0037158B /* ServiceProvider.swift */,
+				36C7B6C42388DCD80037158B /* CodeChallengeRequests.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		36EFC82C2389804D00E9AD04 /* Observables */ = {
+			isa = PBXGroup;
+			children = (
+				36EFC82D2389806600E9AD04 /* GenericObservable.swift */,
+			);
+			path = Observables;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -721,14 +761,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36C7B6C22388DC4A0037158B /* ServiceProvider.swift in Sources */,
 				36BD813A23877BFD0016C3BE /* Colors.swift in Sources */,
 				36BD812B2387788A0016C3BE /* LoaderView+UIViewController.swift in Sources */,
 				36BD812F238778E50016C3BE /* ViewsTag.swift in Sources */,
+				36C7B6C92388E4050037158B /* Quiz1.swift in Sources */,
 				36BD8126238776800016C3BE /* LoaderView.swift in Sources */,
+				36EFC82E2389806600E9AD04 /* GenericObservable.swift in Sources */,
 				36BD813723877BBD0016C3BE /* PrimaryButton.swift in Sources */,
 				367909CE238773CA009449FD /* AppDelegate.swift in Sources */,
 				36BD81FA238780F10016C3BE /* Fonts.swift in Sources */,
+				36C7B6C52388DCD80037158B /* CodeChallengeRequests.swift in Sources */,
 				367909D0238773CA009449FD /* SceneDelegate.swift in Sources */,
+				36EFC83123899BD800E9AD04 /* AlertView+UIViewController.swift in Sources */,
+				36C7B6BF2388DC140037158B /* Service.swift in Sources */,
 				36BD82012387854C0016C3BE /* MainViewController.swift in Sources */,
 				36BD82042387855B0016C3BE /* MainViewModel.swift in Sources */,
 			);
@@ -740,12 +786,18 @@
 			files = (
 				36BD81FB238780F10016C3BE /* Fonts.swift in Sources */,
 				36BD813823877BBD0016C3BE /* PrimaryButton.swift in Sources */,
+				36EFC82F2389806600E9AD04 /* GenericObservable.swift in Sources */,
 				367909E5238773CB009449FD /* Quiz_ChallengeTests.swift in Sources */,
+				36EFC83223899BD800E9AD04 /* AlertView+UIViewController.swift in Sources */,
 				36BD813B23877BFD0016C3BE /* Colors.swift in Sources */,
 				36BD82052387855B0016C3BE /* MainViewModel.swift in Sources */,
 				36BD8127238776800016C3BE /* LoaderView.swift in Sources */,
+				36C7B6CA2388E4050037158B /* Quiz1.swift in Sources */,
 				36BD82022387854C0016C3BE /* MainViewController.swift in Sources */,
+				36C7B6C02388DC140037158B /* Service.swift in Sources */,
+				36C7B6C62388DCD80037158B /* CodeChallengeRequests.swift in Sources */,
 				36BD812C2387788A0016C3BE /* LoaderView+UIViewController.swift in Sources */,
+				36C7B6C32388DC4A0037158B /* ServiceProvider.swift in Sources */,
 				36BD8130238778E50016C3BE /* ViewsTag.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
