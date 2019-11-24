@@ -33,7 +33,7 @@ class MainViewModel: MainViewModelProtocol {
 	var quiz1: Observable<Quiz1?> = Observable(nil)
 	var isPlaying: Bool = false
 	var maxScore: Int = 50
-	private var count: Int = 15
+	private var count: Int = 300
 	private var timer: Timer!
 	private let refreshFrequency: TimeInterval
 	var userScore: Int = 0
@@ -55,15 +55,14 @@ class MainViewModel: MainViewModelProtocol {
 	}
 	
 	func getWordsFromServer(){
-		provider.load(service: .allWords, completion: {
+		provider.load(service: .quiz1, completion: {
 			result in
 			switch result {
 			case .success(let resp):
 				do{
 					let quiz1 = try JSONDecoder().decode(Quiz1.self, from: resp)
 					self.quiz1.value = quiz1
-//					self.maxScore = quiz1.answer.count
-					self.maxScore = 5
+					self.maxScore = quiz1.answer.count
 				}
 				catch{
 					self.quiz1.value = nil
@@ -114,13 +113,13 @@ class MainViewModel: MainViewModelProtocol {
 	
 	//MARK - Timer Control
 	private func startGame(){
-		self.count = 15
+		self.count = 300
 		isPlaying = true
 		timer = Timer.scheduledTimer(timeInterval: refreshFrequency, target: self, selector: #selector(refreshData), userInfo: nil, repeats: true)
 	}
 	
 	func resetGame(){
-		self.count = 15
+		self.count = 300
 		self.userScore = 0
 		timeLabelText.value = "05:00"
 		scoreLabelText.value = "00/\(maxScore)"
@@ -149,7 +148,7 @@ class MainViewModel: MainViewModelProtocol {
 	//Mark: = TableView Controls
 	
 	func rowsCount() -> Int{
-		return self.wordsFound.count
+		return self.wordsToShow.value.count
 	}
 }
 

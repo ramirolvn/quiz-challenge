@@ -8,8 +8,6 @@
 
 import UIKit
 extension UIViewController {
-	
-	// MARK: - Activity Indicator
 	func startLoad() {
 		let nib = UINib(nibName: "LoaderView", bundle: nil)
 		let customAlert = nib.instantiate(withOwner: self, options: nil).first as! LoaderView

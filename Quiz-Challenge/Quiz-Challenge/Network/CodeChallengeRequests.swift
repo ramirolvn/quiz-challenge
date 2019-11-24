@@ -9,7 +9,7 @@
 import Foundation
 
 enum CodeChallengeService {
-	case allWords
+	case quiz1
 }
 
 extension CodeChallengeService: Service {
@@ -19,7 +19,7 @@ extension CodeChallengeService: Service {
 	
 	var path: String {
 		switch self {
-		case .allWords:
+		case .quiz1:
 			return "/quiz/1"
 		}
 	}
@@ -28,7 +28,7 @@ extension CodeChallengeService: Service {
 		let params: [String: Any] = [String: Any]()
 		
 		switch self {
-		case .allWords: break
+		case .quiz1: break
 		}
 		return params
 	}

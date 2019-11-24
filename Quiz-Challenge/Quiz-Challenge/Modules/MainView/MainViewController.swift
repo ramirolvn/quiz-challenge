@@ -48,7 +48,6 @@ class MainViewController: UIViewController{
 		wordListTable.dataSource = self
 		configTextField()
 		notificationsObservers()
-		
 	}
 	
 	private func configTextField(){
@@ -108,6 +107,7 @@ class MainViewController: UIViewController{
 				})
 			}
 		})
+		
 		viewModel.gameCompleted.addObserver({ gameCompleted in
 			if gameCompleted{
 				self.showAlertGameCompleted(playAgainAction: {_ in
@@ -115,6 +115,7 @@ class MainViewController: UIViewController{
 				})
 			}
 		})
+		
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
 		self.view.addGestureRecognizer(tapGesture)
 	}
@@ -147,8 +148,10 @@ class MainViewController: UIViewController{
 			let keyboardHeight = keyboardRectangle.height
 			self.keyboardHeight = keyboardHeight
 			self.bottomConstraint.constant = keyboardHeight
+			if UIDevice.current.orientation.isLandscape{
+				self.contentViewHeight.constant = keyboardHeight
+			}
 			insertWordTF.becomeFirstResponder()
-			if UIDevice.current.orientation.isLandscape{self.contentViewHeight.constant = keyboardHeight}
 		}
 	}
 	
